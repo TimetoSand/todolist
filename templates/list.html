@@ -1,0 +1,27 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+<div class="w3-display-container">
+    <div class="w3-display-topleft w3-padding">
+      <h3>{{date}}</h3>
+    </div>
+    <div class="w3-display">
+
+  <div class="box" id="heading">
+    <h1> {{day}} </h1>
+  </div>
+    {% block content %}
+  <div class="box">
+
+      {% if list | length == 0 %}
+        <span>{{ wtf.quick_form(form_j, extra_classes='item', method="post") }} <p>Add List Item</p></span>
+      {% else %}
+            {% for item in list%}
+                <span id="flo">{{ wtf.quick_form(form_j, extra_classes='item', method="post") }} <p>{{item.listItem}}</p></span>
+            {% endfor %}
+      {% endif %}
+      {{ wtf.quick_form(form, extra_classes='item',  button_map={'submit':'success'}, method="post", novalidate=True) }}
+  </div>
+    </div>
+  {% endblock %}
+  </div>
+ {% include "footer.html" %}
